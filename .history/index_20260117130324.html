@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ZenDashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ======================
+           BASE
+        ====================== */
+        body {
+            background-color: #f5f7fb;
+            font-family: "Inter", system-ui, sans-serif;
+        }
+
+        /* ======================
+           NAVBAR
+        ====================== */
+        .navbar-brand {
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-link.active::after {
+            content: "";
+            position: absolute;
+            bottom: 6px;
+            left: 12px;
+            width: 60%;
+            height: 2px;
+            background: #0d6efd;
+            border-radius: 2px;
+        }
+
+        /* ======================
+           CARDS
+        ====================== */
+        .card {
+            border: none;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+            transition: all 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 32px rgba(0,0,0,0.08);
+        }
+
+        /* ======================
+           STAT ICONS
+        ====================== */
+        .stat-icon {
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .bg-soft-primary { background: rgba(13,110,253,.15); color: #0d6efd; }
+        .bg-soft-success { background: rgba(25,135,84,.15); color: #198754; }
+        .bg-soft-warning { background: rgba(255,193,7,.2); color: #ffc107; }
+        .bg-soft-info { background: rgba(13,202,240,.15); color: #0dcaf0; }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* ======================
+           TABLE
+        ====================== */
+        .table thead th {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            color: #6c757d;
+            border-bottom: none;
+        }
+
+        .table tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        .table tbody tr:hover {
+            background: #f1f4ff;
+        }
+
+        .badge {
+            padding: .45em .7em;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        /* ======================
+           DROPDOWN
+        ====================== */
+        .dropdown-menu {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(0,0,0,.1);
+        }
+
+        /* ======================
+           PAGE ANIMATION
+        ====================== */
+        .page-enter {
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">ZenDashboard</a>
+
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#topNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="topNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#"><i class="bi bi-speedometer2 me-1"></i>Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="bi bi-people me-1"></i>Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="bi bi-bar-chart me-1"></i>Reports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="bi bi-gear me-1"></i>Settings</a>
+                </li>
+            </ul>
+
+            <div class="dropdown">
+                <a class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="bi bi-person-circle"></i> Admin
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Change Password</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="container-fluid py-4 page-enter">
+    <div class="row g-4">
+
+        <!-- STATS -->
+        <div class="col-md-3">
+            <div class="card p-3">
+                <div class="stat-icon bg-soft-primary"><i class="bi bi-people"></i></div>
+                <h6>Total Users</h6>
+                <h3 class="fw-bold">1,245</h3>
+                <small class="text-success">+12% this month</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card p-3">
+                <div class="stat-icon bg-soft-info"><i class="bi bi-activity"></i></div>
+                <h6>Active Sessions</h6>
+                <h3 class="fw-bold">312</h3>
+                <small class="text-primary">Live</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card p-3">
+                <div class="stat-icon bg-soft-success"><i class="bi bi-currency-rupee"></i></div>
+                <h6>Revenue</h6>
+                <h3 class="fw-bold">Rs. 84,500</h3>
+                <small class="text-success">+8.3%</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card p-3">
+                <div class="stat-icon bg-soft-warning"><i class="bi bi-list-check"></i></div>
+                <h6>Pending Tasks</h6>
+                <h3 class="fw-bold">19</h3>
+                <small class="text-warning">Needs attention</small>
+            </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="col-12">
+            <div class="card p-3">
+                <h5 class="mb-3">Recent Users</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Joined</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Rajendra Tamang</td>
+                            <td>rajendra@example.com</td>
+                            <td><span class="badge bg-success">Active</span></td>
+                            <td>2026-01-10</td>
+                        </tr>
+                        <tr>
+                            <td>Zen User</td>
+                            <td>zen@example.com</td>
+                            <td><span class="badge bg-secondary">Inactive</span></td>
+                            <td>2026-01-05</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ICON HOVER ANIMATION -->
+<script>
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            const icon = link.querySelector('i');
+            if (icon) icon.classList.add('bi-bounce');
+        });
+        link.addEventListener('mouseleave', () => {
+            const icon = link.querySelector('i');
+            if (icon) icon.classList.remove('bi-bounce');
+        });
+    });
+</script>
+
+</body>
+</html>
